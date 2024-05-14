@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=3248
+      - POSTGRES_user=postgres
+      - POSTGRES_DB=veemdb
+    ports:
+      - 5432:5432
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    command: uvicorn src.main:app --host 0.0.0.0 --reload
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./server:/app
+    links:
+      - db
+    depends_on:
+      - db
