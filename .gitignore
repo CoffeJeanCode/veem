@@ -1,0 +1,27 @@
+# Node.js
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyc
+*.pyo
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Postgres
+*.sql
+*.sql.gz
+*.dump
+*.bak
+
+# Otros
+.DS_Store
+.env
+*.log
