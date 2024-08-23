@@ -4,8 +4,11 @@ from src.config.database import connection, get_db
 from src.models.user import User
 from src.schemas.user import UserCreate, User as UserSchema
 from src.services.crypto import encrypt
+from passlib.context import CryptContext
+
 
 user = APIRouter(prefix="/user", tags=["Users"])
+bcrypyt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 @user.get("/")
 async def get_all_users(db: Session = Depends(get_db)):
@@ -30,8 +33,8 @@ def get_one_user(user_id: str, db: Session=Depends(get_db)):
 @user.post("/")
 def create_user(user: UserCreate, db: Session=Depends(get_db)):
   user = user.dict()
-  try:
-    user["password"] = encrypt(user["password"].encode("utf-8"))
+  try:  
+    user["password"] = bcrypyt_context.hash(user["password"].encode("utf-8"))
 
     new_user = User(username=user["username"], email=user["email"], password=user["password"])
 
