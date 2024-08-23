@@ -1,4 +1,9 @@
 FROM node:20
 
-WORKDIR /veem
-COPY client server
+RUN mkdir app 
+WORKDIR /app 
+
+COPY package.json .
+COPY . .
+
+RUN npm install 
