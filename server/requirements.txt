@@ -5,3 +5,5 @@ pandas
 numpy
 uvicorn
 cryptography
+passlib
+python-jose
